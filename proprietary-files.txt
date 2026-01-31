@@ -1306,7 +1306,6 @@ vendor/lib64/libvideotxr.so
 
 # Media configs
 vendor/etc/media_pitti/video_system_specs.json
-vendor/etc/media_codecs_c2_audio.xml
 vendor/etc/media_codecs_performance_pitti.xml
 vendor/etc/media_codecs_pitti.xml
 vendor/etc/media_codecs_vendor_audio.xml
