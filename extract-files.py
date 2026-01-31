@@ -62,8 +62,6 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/bin/hw/vendor.qti.camera.provider-service_64',
     ): blob_fixup()
         .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
-    'vendor/etc/seccomp_policy/c2audio.vendor.ext-arm64.policy': blob_fixup()
-        .add_line_if_missing('setsockopt: 1'),
     (
         'vendor/bin/qcc-vendor',
         'vendor/bin/qms',
