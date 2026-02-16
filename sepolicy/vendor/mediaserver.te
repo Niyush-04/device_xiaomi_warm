@@ -1,0 +1,11 @@
+hal_client_domain(mediaserver, hal_audio)
+
+get_prop(mediaserver, vendor_audio_prop)
+get_prop(mediaserver, vendor_video_prop)
+
+allow mediaserver sound_device:chr_file rw_file_perms;
+allow mediaserver system_app_data_file:file { getattr read write };
+allow mediaserver vendor_sys_video_prop:file read;
+
+dontaudit mediaserver vendor_hal_qspmhal_hwservice:hwservice_manager find;
+dontaudit mediaserver vendor_hal_qspmhal_service:service_manager find;

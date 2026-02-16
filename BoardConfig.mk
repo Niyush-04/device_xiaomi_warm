@@ -81,9 +81,6 @@ BOARD_BOOTCONFIG := \
     androidboot.usb.dwc3_msm=4e00000.ssusb \
     androidboot.load_modules_parallel=true
 
-BOARD_BOOTCONFIG += \
-    androidboot.selinux=permissive
-
 # Kernel (prebuilt)
 PREBUILT_PATH := device/xiaomi/warm-kernel
 TARGET_NO_KERNEL_OVERRIDE := true
@@ -167,6 +164,7 @@ ENABLE_VENDOR_RIL_SERVICE := true
 
 # Sepolicy
 include device/qcom/sepolicy_vndr/SEPolicy.mk
+BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
 # Vendor security patch
 VENDOR_SECURITY_PATCH := 2025-11-01

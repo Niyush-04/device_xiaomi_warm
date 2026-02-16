@@ -1,0 +1,51 @@
+type hal_wifi_supplicant_default, domain;
+type hal_wifi_supplicant_default_exec, exec_type, file_type, vendor_file_type;
+
+hal_client_domain(hal_wifi_supplicant_default, hal_nlinterceptor)
+hal_client_domain(hal_wifi_supplicant_default, hal_wifi)
+
+hal_server_domain(hal_wifi_supplicant_default, hal_wifi_supplicant)
+
+net_domain(hal_wifi_supplicant_default)
+
+binder_call(hal_wifi_supplicant_default, wifi_keystore_service_server)
+
+get_prop(hal_wifi_supplicant_default, device_logging_prop)
+
+hwbinder_use(hal_wifi_supplicant_default)
+
+init_daemon_domain(hal_wifi_supplicant_default)
+
+allow hal_wifi_supplicant vendor_fstman:unix_dgram_socket sendto;
+allow hal_wifi_supplicant vendor_wifi_vendor_data_file:dir create_dir_perms;
+allow hal_wifi_supplicant vendor_wifi_vendor_data_file:file create_file_perms;
+allow hal_wifi_supplicant vendor_wifi_vendor_wpa_socket:dir create_dir_perms;
+allow hal_wifi_supplicant vendor_wifi_vendor_wpa_socket:sock_file create_file_perms;
+allow hal_wifi_supplicant vendor_wigig_vendor_wpa_socket:sock_file rw_file_perms;
+allow hal_wifi_supplicant vendor_wigighalsvc:unix_dgram_socket sendto;
+allow hal_wifi_supplicant_default hal_wifi_default:binder call;
+allow hal_wifi_supplicant_default hal_wifi_hwservice:hwservice_manager find;
+allow hal_wifi_supplicant_default proc_net:file write;
+allow hal_wifi_supplicant_default proc_net_type:file write;
+allow hal_wifi_supplicant_default self:qipcrtr_socket create_socket_perms_no_ioctl;
+allow hal_wifi_supplicant_default self:socket create_socket_perms;
+allow hal_wifi_supplicant_default system_wifi_keystore_hwservice:hwservice_manager find;
+allow hal_wifi_supplicant_default vendor_cnd:unix_dgram_socket sendto;
+allow hal_wifi_supplicant_default vendor_location_lowi_server:unix_dgram_socket sendto;
+allow hal_wifi_supplicant_default vendor_log_wifi_data_file:dir { add_name write };
+allow hal_wifi_supplicant_default vendor_log_wifi_data_file:dir search;
+allow hal_wifi_supplicant_default vendor_log_wifi_data_file:dir write;
+allow hal_wifi_supplicant_default vendor_log_wifi_data_file:file { create getattr open write };
+allow hal_wifi_supplicant_default vendor_qms:unix_dgram_socket sendto;
+allow hal_wifi_supplicant_default vendor_tombstone_data_file:dir { open read search };
+allow hal_wifi_supplicant_default vendor_tombstone_data_file:file { getattr open read };
+allow hal_wifi_supplicant_default wpa_data_file:dir create_dir_perms;
+allow hal_wifi_supplicant_default wpa_data_file:dir w_dir_perms;
+allow hal_wifi_supplicant_default wpa_data_file:{ file sock_file } create_file_perms;
+
+allowxperm hal_wifi_supplicant_default self:socket ioctl { 0xc300 0xc301 0xc302 0xc303 0xc304 0xc305 };
+
+dontaudit hal_wifi_supplicant_default wifi_data_file:dir search;
+
+type_transition hal_wifi_supplicant vendor_wifi_vendor_data_file:dir "wigig_sockets" vendor_wifi_vendor_wpa_socket;
+type_transition hal_wifi_supplicant_default wifi_data_file:dir "sockets" wpa_socket;

@@ -1,0 +1,27 @@
+hal_client_domain(radio, vendor_hal_perf)
+hal_client_domain(radio, vendor_hal_qspmhal)
+
+get_prop(radio, vendor_audio_prop)
+get_prop(radio, vendor_radio_prop)
+
+set_prop(radio, exported_dumpstate_prop)
+
+allow radio logd_prop:property_service set;
+allow radio mediaextractor_service:service_manager find;
+allow radio proc_touchpad:file rw_file_perms;
+allow radio vendor_audio_prop:file getattr;
+allow radio vendor_audio_prop:file map;
+allow radio vendor_audio_prop:file open;
+allow radio vendor_audio_prop:file read;
+allow radio vendor_avtimer_device:chr_file r_file_perms;
+allow radio vendor_data_touchpad:dir create_dir_perms;
+allow radio vendor_data_touchpad:file create_file_perms;
+allow radio vendor_file:lnk_file r_file_perms;
+allow radio vendor_framework_file:dir search;
+allow radio vendor_framework_file:file r_file_perms;
+allow radio vendor_hal_imsrtp_hwservice:hwservice_manager find;
+allow radio vendor_modem_data_file:dir rw_dir_perms;
+allow radio vendor_modem_data_file:file { create getattr open read unlink write };
+allow radio vendor_ramdump_vendor_data_file:fifo_file { create open read write };
+allow radio wificond:binder { call transfer };
+allow radio wifinl80211_service:service_manager find;

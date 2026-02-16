@@ -1,0 +1,55 @@
+type vendor_wcnss_service, domain;
+type vendor_wcnss_service_exec, exec_type, file_type, vendor_file_type;
+
+net_domain(vendor_wcnss_service)
+
+binder_call(vendor_wcnss_service, vendor_per_mgr)
+
+init_daemon_domain(vendor_wcnss_service)
+
+set_prop(vendor_wcnss_service, vendor_wlanchip_prop)
+
+unix_socket_connect(vendor_wcnss_service, property, vendor_wigignpt)
+unix_socket_connect(vendor_wcnss_service, vendor_wigignpt, init)
+
+vndbinder_use(vendor_wcnss_service)
+
+allow vendor_wcnss_service firmware_file:dir r_dir_perms;
+allow vendor_wcnss_service firmware_file:file r_file_perms;
+allow vendor_wcnss_service kmsg_device:chr_file { open write };
+allow vendor_wcnss_service mnt_vendor_file:dir search;
+allow vendor_wcnss_service mnt_vendor_file:file { getattr open read };
+allow vendor_wcnss_service proc_net:file getattr;
+allow vendor_wcnss_service proc_net:file read;
+allow vendor_wcnss_service proc_net:file rw_file_perms;
+allow vendor_wcnss_service self:capability net_admin;
+allow vendor_wcnss_service self:capability { net_raw setgid setuid };
+allow vendor_wcnss_service self:capability sys_module;
+allow vendor_wcnss_service self:packet_socket { bind create getopt ioctl map read setopt };
+allow vendor_wcnss_service self:packet_socket write;
+allow vendor_wcnss_service self:{ netlink_generic_socket netlink_socket } create_socket_perms_no_ioctl;
+allow vendor_wcnss_service self:{ qipcrtr_socket socket } create_socket_perms;
+allow vendor_wcnss_service sysfs_net:dir search;
+allow vendor_wcnss_service sysfs_net:file { getattr open write };
+allow vendor_wcnss_service vendor_data_file:file getattr;
+allow vendor_wcnss_service vendor_per_mgr_service:service_manager find;
+allow vendor_wcnss_service vendor_radio_prop:file { getattr open read };
+allow vendor_wcnss_service vendor_shell_exec:file rx_file_perms;
+allow vendor_wcnss_service vendor_sysfs_data:file r_file_perms;
+allow vendor_wcnss_service vendor_toolbox_exec:file rx_file_perms;
+allow vendor_wcnss_service vendor_wifi_vendor_data_file:dir create_dir_perms;
+allow vendor_wcnss_service vendor_wifi_vendor_data_file:file create_file_perms;
+allow vendor_wcnss_service vendor_wifi_vendor_wpa_socket:dir create_dir_perms;
+allow vendor_wcnss_service vendor_wifi_vendor_wpa_socket:dir r_dir_perms;
+allow vendor_wcnss_service vendor_wifi_vendor_wpa_socket:{ file sock_file } create_file_perms;
+allow vendor_wcnss_service vendor_wifi_vendor_wpa_socket:{ file sock_file } rw_file_perms;
+allow vendor_wcnss_service wpa_data_file:dir create_dir_perms;
+allow vendor_wcnss_service wpa_data_file:file create_file_perms;
+
+allowxperm vendor_wcnss_service self:packet_socket ioctl { FIOCLEX FIONCLEX I2OGETIOPS I2OLCTGET OSIOCGNETADDR OSIOCSNETADDR SIOCADDDLCI SIOCADDMULTI SIOCADDRT SIOCBONDCHANGEACTIVE SIOCBONDENSLAVE SIOCBONDINFOQUERY SIOCBONDRELEASE SIOCBONDSETHWADDR SIOCBONDSLAVEINFOQUERY SIOCBRADDBR SIOCBRADDIF SIOCBRDELBR SIOCBRDELIF SIOCDARP SIOCDELDLCI SIOCDELMULTI SIOCDELRT SIOCDEVPRIVATE SIOCDEVPRIVATE_1 SIOCDEVPRIVATE_2 SIOCDEVPRIVATE_3 SIOCDEVPRIVATE_4 SIOCDEVPRIVATE_5 SIOCDEVPRIVATE_6 SIOCDEVPRIVATE_7 SIOCDEVPRIVATE_8 SIOCDEVPRIVATE_9 SIOCDEVPRIVATE_A SIOCDEVPRIVATE_B SIOCDEVPRIVATE_C SIOCDEVPRIVATE_D SIOCDEVPRIVATE_E SIOCDEVPRIVLAST SIOCDIFADDR SIOCDRARP SIOCETHTOOL SIOCGARP SIOCGIFADDR SIOCGIFBR SIOCGIFBRDADDR SIOCGIFCONF SIOCGIFCOUNT SIOCGIFDSTADDR SIOCGIFENCAP SIOCGIFFLAGS SIOCGIFHWADDR SIOCGIFINDEX SIOCGIFMAP SIOCGIFMEM SIOCGIFMETRIC SIOCGIFMTU SIOCGIFNAME SIOCGIFNETMASK SIOCGIFPFLAGS SIOCGIFSLAVE SIOCGIFTXQLEN SIOCGIFVLAN SIOCGIWAP SIOCGIWAPLIST SIOCGIWAUTH SIOCGIWENCODE SIOCGIWENCODEEXT SIOCGIWESSID SIOCGIWFRAG SIOCGIWFREQ SIOCGIWGENIE SIOCGIWMODE SIOCGIWNAME SIOCGIWNICKN SIOCGIWPOWER SIOCGIWPRIV SIOCGIWRANGE SIOCGIWRATE SIOCGIWRETRY SIOCGIWRTS SIOCGIWSCAN SIOCGIWSENS SIOCGIWSPY SIOCGIWSTATS SIOCGIWTHRSPY SIOCGIWTXPOW SIOCGMIIPHY SIOCGMIIREG SIOCGRARP SIOCGSTAMP SIOCGSTAMPNS SIOCIWFIRST SIOCIWFIRSTPRIV SIOCIWFIRSTPRIV_01 SIOCIWFIRSTPRIV_02 SIOCIWFIRSTPRIV_03 SIOCIWFIRSTPRIV_04 SIOCIWFIRSTPRIV_05 SIOCIWFIRSTPRIV_06 SIOCIWFIRSTPRIV_07 SIOCIWFIRSTPRIV_08 SIOCIWFIRSTPRIV_09 SIOCIWFIRSTPRIV_0A SIOCIWFIRSTPRIV_0B SIOCIWFIRSTPRIV_0C SIOCIWFIRSTPRIV_0D SIOCIWFIRSTPRIV_0E SIOCIWFIRSTPRIV_0F SIOCIWFIRSTPRIV_10 SIOCIWFIRSTPRIV_11 SIOCIWFIRSTPRIV_12 SIOCIWFIRSTPRIV_13 SIOCIWFIRSTPRIV_14 SIOCIWFIRSTPRIV_15 SIOCIWFIRSTPRIV_16 SIOCIWFIRSTPRIV_17 SIOCIWFIRSTPRIV_18 SIOCIWFIRSTPRIV_19 SIOCIWFIRSTPRIV_1A SIOCIWFIRSTPRIV_1B SIOCIWFIRSTPRIV_1C SIOCIWFIRSTPRIV_1D SIOCIWFIRSTPRIV_1E SIOCIWLASTPRIV SIOCKILLADDR SIOCOUTQNSD SIOCPROTOPRIVATE_2 SIOCPROTOPRIVATE_3 SIOCPROTOPRIVATE_4 SIOCPROTOPRIVATE_5 SIOCPROTOPRIVATE_6 SIOCPROTOPRIVATE_7 SIOCPROTOPRIVATE_8 SIOCPROTOPRIVATE_9 SIOCPROTOPRIVATE_A SIOCPROTOPRIVATE_B SIOCPROTOPRIVATE_C SIOCPROTOPRIVATE_D SIOCPROTOPRIVATE_E SIOCPROTOPRIVLAST SIOCRTMSG SIOCSARP SIOCSHWTSTAMP SIOCSIFADDR SIOCSIFBR SIOCSIFBRDADDR SIOCSIFDSTADDR SIOCSIFENCAP SIOCSIFFLAGS SIOCSIFHWADDR SIOCSIFHWBROADCAST SIOCSIFLINK SIOCSIFMAP SIOCSIFMEM SIOCSIFMETRIC SIOCSIFMTU SIOCSIFNAME SIOCSIFNETMASK SIOCSIFPFLAGS SIOCSIFSLAVE SIOCSIFTXQLEN SIOCSIFVLAN SIOCSIWAP SIOCSIWAUTH SIOCSIWENCODE SIOCSIWENCODEEXT SIOCSIWESSID SIOCSIWFRAG SIOCSIWFREQ SIOCSIWGENIE SIOCSIWMLME SIOCSIWMODE SIOCSIWNICKN SIOCSIWNWID SIOCSIWPMKSA SIOCSIWPOWER SIOCSIWPRIV SIOCSIWRANGE SIOCSIWRATE SIOCSIWRETRY SIOCSIWRTS SIOCSIWSCAN SIOCSIWSENS SIOCSIWSPY SIOCSIWSTATS SIOCSIWTHRSPY SIOCSIWTXPOW SIOCSMIIREG SIOCSRARP SIOCWANDEV SNDCTL_TMR_CONTINUE SNDCTL_TMR_START SNDCTL_TMR_STOP SNDCTL_TMR_TIMEBASE SNDRV_TIMER_IOCTL_INFO SNDRV_TIMER_IOCTL_SELECT SNDRV_TIMER_IOCTL_STATUS TCFLSH TIOCGPGRP TIOCGWINSZ TIOCSCTTY };
+allowxperm vendor_wcnss_service self:qipcrtr_socket ioctl { 0xc300 0xc301 0xc302 0xc303 0xc304 0xc305 };
+allowxperm vendor_wcnss_service self:socket ioctl { 0xc300 0xc301 0xc302 0xc303 0xc304 0xc305 };
+allowxperm vendor_wcnss_service self:socket ioctl SIOCETHTOOL;
+allowxperm vendor_wcnss_service self:udp_socket ioctl { SIOCBONDENSLAVE SIOCBONDRELEASE SIOCETHTOOL SIOCGIFFLAGS SIOCIWFIRSTPRIV_07 SIOCSIFFLAGS SIOCSIFTXQLEN };
+allowxperm vendor_wcnss_service self:udp_socket ioctl { SIOCIWFIRSTPRIV_05 SIOCSIFFLAGS };
+allowxperm vendor_wcnss_service self:unix_dgram_socket ioctl SIOCETHTOOL;

@@ -1,0 +1,48 @@
+type hal_sensors_default, domain;
+type hal_sensors_default_exec, exec_type, file_type, vendor_file_type;
+
+hal_client_domain(hal_sensors_default, hal_graphics_allocator)
+
+hal_server_domain(hal_sensors_default, hal_sensors)
+
+binder_call(hal_sensors_default, system_server)
+
+get_prop(hal_sensors_default, vendor_adsprpc_prop)
+get_prop(hal_sensors_default, vendor_dynamic_sensor_prop)
+get_prop(hal_sensors_default, vendor_qc_aon_prop)
+get_prop(hal_sensors_default, vendor_sensors_prop)
+
+init_daemon_domain(hal_sensors_default)
+
+r_dir_file(hal_sensors_default, vendor_persist_sensors_file)
+
+wakelock_use(hal_sensors_default)
+
+allow hal_sensors vendor_sysfs_data:file r_file_perms;
+allow hal_sensors vendor_sysfs_sensors:dir r_dir_perms;
+allow hal_sensors vendor_sysfs_sensors:file rw_file_perms;
+allow hal_sensors vendor_sysfs_sensors:lnk_file read;
+allow hal_sensors_default device:dir r_dir_perms;
+allow hal_sensors_default dmabuf_system_heap_device:chr_file r_file_perms;
+allow hal_sensors_default fwk_scheduler_hwservice:hwservice_manager find;
+allow hal_sensors_default hal_graphics_allocator_default:fd use;
+allow hal_sensors_default input_device:chr_file r_file_perms;
+allow hal_sensors_default input_device:dir r_dir_perms;
+allow hal_sensors_default ion_device:chr_file r_file_perms;
+allow hal_sensors_default mnt_vendor_file:dir rw_dir_perms;
+allow hal_sensors_default mnt_vendor_file:dir search;
+allow hal_sensors_default mnt_vendor_file:file create_file_perms;
+allow hal_sensors_default self:{ qipcrtr_socket socket } create_socket_perms;
+allow hal_sensors_default sysfs_tp_virtual_prox:file { open read write };
+allow hal_sensors_default vendor_dmabuf_system_heap_device:chr_file r_file_perms;
+allow hal_sensors_default vendor_hidraw_device:chr_file rw_file_perms;
+allow hal_sensors_default vendor_persist_sensors_file:dir rw_dir_perms;
+allow hal_sensors_default vendor_persist_sensors_file:file create_file_perms;
+allow hal_sensors_default vendor_qvrd_vndr:fd use;
+allow hal_sensors_default vendor_sysfs_adsp_ssr:file w_file_perms;
+allow hal_sensors_default vendor_sysfs_slpi:dir search;
+allow hal_sensors_default vendor_sysfs_slpi:file rw_file_perms;
+allow hal_sensors_default vendor_xdsp_device:chr_file r_file_perms;
+
+allowxperm hal_sensors_default self:qipcrtr_socket ioctl { 0xc300 0xc301 0xc302 0xc303 0xc304 0xc305 };
+allowxperm hal_sensors_default self:socket ioctl { 0xc300 0xc301 0xc302 0xc303 0xc304 0xc305 };

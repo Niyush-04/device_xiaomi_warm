@@ -1,0 +1,8 @@
+# Battery
+genfscon sysfs /class/qcom-battery u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /class/lc_charger u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /class/charge_pump u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /bus/iio/devices u:object_r:vendor_sysfs_battery_supply:s0
+
+# Fingerprint
+genfscon sysfs /devices/platform/soc/soc:fp_fpc1020 u:object_r:vendor_sysfs_fingerprint:s0

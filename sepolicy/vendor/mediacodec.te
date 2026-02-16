@@ -1,0 +1,60 @@
+type mediacodec, domain, mlstrustedsubject;
+type mediacodec_exec, exec_type, file_type, vendor_file_type;
+
+hal_client_domain(mediacodec, hal_allocator)
+hal_client_domain(mediacodec, hal_audio)
+hal_client_domain(mediacodec, hal_codec2)
+hal_client_domain(mediacodec, hal_graphics_allocator)
+hal_client_domain(mediacodec, hal_graphics_composer)
+hal_client_domain(mediacodec, hal_omx)
+hal_client_domain(mediacodec, vendor_hal_capabilityconfigstore_qti)
+hal_client_domain(mediacodec, vendor_hal_dspmanager)
+hal_client_domain(mediacodec, vendor_hal_hexlp)
+hal_client_domain(mediacodec, vendor_hal_perf)
+hal_client_domain(mediacodec, vendor_hal_qconfig)
+hal_client_domain(mediacodec, vendor_hal_vpp)
+
+hal_server_domain(mediacodec, hal_codec2)
+hal_server_domain(mediacodec, hal_omx)
+
+binder_call(mediacodec, hal_graphics_composer_default)
+binder_call(mediacodec, vendor_wifidisplayhalservice_qti)
+
+crash_dump_fallback(mediacodec)
+
+get_prop(mediacodec, aac_drc_prop)
+get_prop(mediacodec, vendor_adsprpc_prop)
+get_prop(mediacodec, vendor_audio_prop)
+get_prop(mediacodec, vendor_displayfeature_prop)
+get_prop(mediacodec, vendor_video_prop)
+
+init_daemon_domain(mediacodec)
+
+vndbinder_use(mediacodec)
+
+allow mediacodec audio_device:chr_file rw_file_perms;
+allow mediacodec dmabuf_system_heap_device:chr_file r_file_perms;
+allow mediacodec gpu_device:chr_file rw_file_perms;
+allow mediacodec gpu_device:dir r_dir_perms;
+allow mediacodec ion_device:chr_file rw_file_perms;
+allow mediacodec system_file:dir r_dir_perms;
+allow mediacodec vendor_dmabuf_system_heap_device:chr_file r_file_perms;
+allow mediacodec vendor_media_data_file:dir create_dir_perms;
+allow mediacodec vendor_media_data_file:file create_file_perms;
+allow mediacodec vendor_membuf_dev:chr_file r_file_perms;
+allow mediacodec vendor_mistcdisplay_service:service_manager find;
+allow mediacodec vendor_qdsp_device:chr_file { ioctl read };
+allow mediacodec vendor_vm_cp_bitstream_device:chr_file r_file_perms;
+allow mediacodec vendor_wfdnativemm_service:service_manager find;
+allow mediacodec video_device:chr_file rw_file_perms;
+allow mediacodec video_device:dir search;
+
+dontaudit mediacodec vendor_hal_qspmhal_hwservice:hwservice_manager find;
+dontaudit mediacodec vendor_hal_qspmhal_service:service_manager find;
+dontaudit mediacodec vendor_qdsp_device:chr_file open;
+dontaudit mediacodec vendor_xdsp_device:chr_file { getattr map open read };
+
+neverallow mediacodec domain:{ rawip_socket tcp_socket udp_socket } *;
+neverallow mediacodec file_type:file execute_no_trans;
+neverallow mediacodec fs_type:file execute_no_trans;
+neverallow mediacodec vendor_qdsp_device:chr_file { audit_access entrypoint execmod execute execute_no_trans getattr lock map mounton no_w_file_perms open quotaon relabelto watch watch_mount watch_reads watch_sb watch_with_perm };

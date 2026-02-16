@@ -1,0 +1,127 @@
+domain_auto_trans(init, vendor_shell_exec, vendor_qti_init_shell)
+
+domain_trans(init, hal_health_default_exec, charger_vendor)
+domain_trans(init, vendor_modinstall-sh_exec, vendor_modprobe)
+domain_trans(init, vendor_toolbox_exec, vendor_modprobe)
+
+get_prop(vendor_init, persist_debug_prop)
+get_prop(vendor_init, vendor_boot_mode_prop)
+get_prop(vendor_init, vendor_btmac_prop)
+get_prop(vendor_init, vendor_media_performance_class)
+get_prop(vendor_init, vendor_memory_min_free_kbytes)
+get_prop(vendor_init, vendor_mmi_prop)
+get_prop(vendor_init, vendor_pcie_prop)
+get_prop(vendor_init, vendor_procomp_prop)
+get_prop(vendor_init, vendor_soc_model_prop)
+get_prop(vendor_init, vendor_soc_name_prop)
+get_prop(vendor_init, vendor_wlan_logs_prop_ro)
+get_prop(vendor_init, vendor_wlanchip_prop)
+
+set_prop(vendor_init, exported_system_prop)
+set_prop(vendor_init, system_prop)
+set_prop(vendor_init, vendor_audio_prop)
+set_prop(vendor_init, vendor_bluetooth_prop)
+set_prop(vendor_init, vendor_confqmaa)
+set_prop(vendor_init, vendor_dcvs_prop)
+set_prop(vendor_init, vendor_deviceid_prop)
+set_prop(vendor_init, vendor_disable_spu_prop)
+set_prop(vendor_init, vendor_display_prop)
+set_prop(vendor_init, vendor_displayfeature_prop)
+set_prop(vendor_init, vendor_gpu_prop)
+set_prop(vendor_init, vendor_gralloc_prop)
+set_prop(vendor_init, vendor_hvdcp_opti_prop)
+set_prop(vendor_init, vendor_mm_parser_prop)
+set_prop(vendor_init, vendor_mpctl_prop)
+set_prop(vendor_init, vendor_pasr_prop)
+set_prop(vendor_init, vendor_persist_dpm_prop)
+set_prop(vendor_init, vendor_persist_rcs_prop)
+set_prop(vendor_init, vendor_promotion_prop)
+set_prop(vendor_init, vendor_public_vendor_default_prop)
+set_prop(vendor_init, vendor_qspm_prop)
+set_prop(vendor_init, vendor_qteeconnector_opti_prop)
+set_prop(vendor_init, vendor_radio_prop)
+set_prop(vendor_init, vendor_sensors_prop)
+set_prop(vendor_init, vendor_sys_video_prop)
+set_prop(vendor_init, vendor_usb_prop)
+set_prop(vendor_init, vendor_uwb_prop)
+set_prop(vendor_init, vendor_video_prop)
+set_prop(vendor_init, vendor_wifi_lc_prop)
+set_prop(vendor_init, vendor_wigig_prop)
+set_prop(vendor_init, vendor_wlan_logs_prop)
+
+allow init adsprpcd_file:dir mounton;
+allow init boot_block_device:{ blk_file lnk_file } relabelto;
+allow init bt_firmware_file:dir mounton;
+allow init bt_firmware_file:filesystem getattr;
+allow init bt_firmware_file:filesystem { mount relabelfrom };
+allow init firmware_file:dir mounton;
+allow init firmware_file:filesystem getattr;
+allow init firmware_file:filesystem { mount relabelfrom };
+allow init hal_fingerprint_default:process ptrace;
+allow init hwinfo_exec:file { execute getattr open read };
+allow init mi_ic_exec:file { execute getattr open read };
+allow init mi_ric_exec:file { execute getattr open read };
+allow init minidump64_exec:file { execute getattr open read };
+allow init mnt_product_file:dir mounton;
+allow init mnt_vendor_file:dir mounton;
+allow init proc_touchpad:file { getattr open read setattr write };
+allow init same_process_hal_file:dir mounton;
+allow init socket_device:sock_file { create setattr unlink write };
+allow init socket_device:sock_file create_file_perms;
+allow init sysfs_leds:lnk_file r_file_perms;
+allow init sysfs_zram:dir r_dir_perms;
+allow init sysfs_zram:file r_file_perms;
+allow init tmpfs:lnk_file create;
+allow init vendor_ab_block_device:lnk_file relabelto;
+allow init vendor_custom_ab_block_device:{ blk_file lnk_file } relabelto;
+allow init vendor_firmware_file:dir mounton;
+allow init vendor_mdtp_device:{ blk_file lnk_file } relabelto;
+allow init vendor_modem_block_device:{ blk_file lnk_file } relabelto;
+allow init vendor_qmcs_file:dir mounton;
+allow init vendor_qmcs_file:filesystem { mount relabelfrom relabelto unmount };
+allow init vendor_spunvm_file:dir mounton;
+allow init vendor_spunvm_file:filesystem { mount relabelfrom relabelto };
+allow init vendor_spunvm_file:filesystem { mount relabelfrom relabelto unmount };
+allow init vendor_ssd_block_device:{ blk_file lnk_file } relabelto;
+allow init vendor_sys_nonsp_comp:file r_file_perms;
+allow init vendor_sys_sp_comp:file r_file_perms;
+allow init vendor_sysfs_boot_adsp:file w_file_perms;
+allow init vendor_sysfs_graphics:file setattr;
+allow init vendor_sysfs_qvr_external_sensor:file setattr;
+allow init vendor_vm_data_block_device:{ blk_file lnk_file } relabelto;
+allow init vendor_vm_system_file:dir mounton;
+allow init vendor_xbl_block_device:{ blk_file lnk_file } relabelto;
+allow vendor_init block_device:lnk_file setattr;
+allow vendor_init configfs:dir r_dir_perms;
+allow vendor_init configfs:file { link rw_file_perms };
+allow vendor_init kernel:file { open write };
+allow vendor_init kernel:process setsched;
+allow vendor_init kernel:system module_request;
+allow vendor_init kernel:{ dir key } search;
+allow vendor_init kmsg_device:chr_file write;
+allow vendor_init minidump_data_file:dir create_dir_perms;
+allow vendor_init minidump_data_file:file create_file_perms;
+allow vendor_init proc:file write;
+allow vendor_init proc_touchpad:file write;
+allow vendor_init rootfs:dir read;
+allow vendor_init self:capability sys_module;
+allow vendor_init sysfs_android_usb:file rw_file_perms;
+allow vendor_init tee_device:chr_file getattr;
+allow vendor_init unlabeled:dir { r_dir_perms relabelfrom setattr };
+allow vendor_init unlabeled:file { r_file_perms relabelfrom setattr };
+allow vendor_init vendor_camera_data_file:dir create_dir_perms;
+allow vendor_init vendor_file:system module_load;
+allow vendor_init vendor_ipa_dev:chr_file w_file_perms;
+allow vendor_init vendor_ipa_dev:chr_file write;
+allow vendor_init vendor_ipa_dev:file create_file_perms;
+allow vendor_init vendor_mi_ic_prop:property_service set;
+allow vendor_init vendor_mi_ric_prop:property_service set;
+allow vendor_init vendor_persist_block_device:{ blk_file lnk_file } relabelto;
+allow vendor_init vendor_ssr_prop:property_service set;
+allow vendor_init vendor_sysfs_scsi_host:file setattr;
+allow vendor_init vendor_sysfs_slpi:file write;
+allow vendor_init vendor_sysfs_ssr:file write;
+allow vendor_init vendor_tui_data_file:dir create_dir_perms;
+allow vendor_init vfat:dir create_dir_perms;
+
+dontaudit init kernel:system module_request;

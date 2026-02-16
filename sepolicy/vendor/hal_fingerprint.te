@@ -1,0 +1,42 @@
+type hal_fingerprint_default, domain;
+type hal_fingerprint_default_exec, exec_type, file_type, vendor_file_type;
+
+hal_client_domain(hal_fingerprint_default, vendor_hal_perf)
+
+hal_server_domain(hal_fingerprint_default, hal_fingerprint)
+
+hal_attribute_service(hal_fingerprint, vendor_hal_qfpextendedfingerprint_service)
+
+init_daemon_domain(hal_fingerprint_default)
+
+set_prop(hal_fingerprint_default, vendor_fp_prop)
+set_prop(hal_fingerprint_default, vendor_silead_fp_prop)
+set_prop(hal_fingerprint_default, virtual_fingerprint_hal_prop)
+
+allow hal_fingerprint_default fingerprintd_device:chr_file { read write };
+allow hal_fingerprint_default fingerprintd_device:chr_file rw_file_perms;
+allow hal_fingerprint_default firmware_file:dir r_dir_perms;
+allow hal_fingerprint_default firmware_file:file r_file_perms;
+allow hal_fingerprint_default fwk_sensor_service:service_manager find;
+allow hal_fingerprint_default ion_device:chr_file r_file_perms;
+allow hal_fingerprint_default platform_app:binder { call transfer };
+allow hal_fingerprint_default rootfs:dir { open read };
+allow hal_fingerprint_default self:netlink_socket create_socket_perms_no_ioctl;
+allow hal_fingerprint_default self:unix_stream_socket { connectto create_stream_socket_perms };
+allow hal_fingerprint_default silead_fpd_data_file:dir { create rmdir };
+allow hal_fingerprint_default silead_fpd_data_file:dir rw_dir_perms;
+allow hal_fingerprint_default silead_fpd_data_file:file create_file_perms;
+allow hal_fingerprint_default silead_fpd_device:chr_file rw_file_perms;
+allow hal_fingerprint_default sysfs:file write;
+allow hal_fingerprint_default system_data_root_file:dir read;
+allow hal_fingerprint_default tee_device:chr_file { ioctl open read write };
+allow hal_fingerprint_default uhid_device:chr_file rw_file_perms;
+allow hal_fingerprint_default vendor_data_file:file { append getattr open read write };
+allow hal_fingerprint_default vendor_dmabuf_qseecom_heap_device:chr_file { ioctl open read write };
+allow hal_fingerprint_default vendor_dmabuf_qseecom_ta_heap_device:chr_file { ioctl open read write };
+allow hal_fingerprint_default vendor_hal_fingerprint_hwservice_xiaomi:hwservice_manager { add find };
+allow hal_fingerprint_default vendor_hal_perf_default:binder call;
+allow hal_fingerprint_default vendor_hal_perf_hwservice:hwservice_manager find;
+allow hal_fingerprint_default vendor_sysfs_displayfeature:file { open write };
+allow hal_fingerprint_default vendor_sysfs_fingerprint:dir { open read search };
+allow hal_fingerprint_default vendor_sysfs_fingerprint:file { open read write };

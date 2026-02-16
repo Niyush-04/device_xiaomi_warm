@@ -1,0 +1,34 @@
+type hal_mlipay_default, domain;
+type hal_mlipay_default_exec, exec_type, file_type, vendor_file_type;
+type hal_mlipay_service, hal_service_type, protected_service, service_manager_type;
+
+attribute hal_mlipay;
+attribute hal_mlipay_client;
+attribute hal_mlipay_server;
+
+hal_server_domain(hal_mlipay_default, hal_mlipay)
+
+binder_call(hal_mlipay_client, hal_mlipay_server)
+binder_call(hal_mlipay_server, hal_mlipay_client)
+binder_call(hal_mlipay_server, servicemanager)
+
+binder_use(hal_mlipay_default)
+
+get_prop(hal_mlipay_default, vendor_fp_prop)
+get_prop(hal_mlipay_default, vendor_system_prop)
+
+hal_attribute_service(hal_mlipay, hal_mlipay_service)
+
+init_daemon_domain(hal_mlipay_default)
+
+set_prop(hal_mlipay_default, vendor_payment_security_prop)
+
+allow hal_mlipay_default firmware_file:dir r_dir_perms;
+allow hal_mlipay_default firmware_file:file r_file_perms;
+allow hal_mlipay_default ion_device:chr_file rw_file_perms;
+allow hal_mlipay_default rootfs:lnk_file r_file_perms;
+allow hal_mlipay_default tee_device:chr_file rw_file_perms;
+allow hal_mlipay_default vendor_dmabuf_qseecom_heap_device:chr_file { ioctl open read };
+allow hal_mlipay_default vendor_dmabuf_qseecom_ta_heap_device:chr_file { ioctl open read };
+
+neverallow { domain -atrace -dumpstate -shell -system_app -traceur_app -hal_mlipay_server -hal_mlipay_client } hal_mlipay_service:service_manager find;

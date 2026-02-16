@@ -1,0 +1,54 @@
+type hal_gnss_default, domain;
+type hal_gnss_default_exec, exec_type, file_type, vendor_file_type;
+type vendor_hal_gnss_qti, domain;
+type vendor_hal_gnss_qti_exec, exec_type, file_type, vendor_file_type;
+
+hal_client_domain(vendor_hal_gnss_qti, hal_health)
+hal_client_domain(vendor_hal_gnss_qti, vendor_hal_qms_qti)
+
+hal_server_domain(hal_gnss_default, hal_gnss)
+hal_server_domain(vendor_hal_gnss_qti, hal_gnss)
+
+binder_call(vendor_hal_gnss_qti, vendor_per_mgr)
+
+binder_use(vendor_hal_gnss_qti)
+
+get_prop(vendor_hal_gnss_qti, boot_status_prop)
+get_prop(vendor_hal_gnss_qti, vendor_per_mgr_state_prop)
+get_prop(vendor_hal_gnss_qti, vendor_qms_prop)
+
+init_daemon_domain(hal_gnss_default)
+init_daemon_domain(vendor_hal_gnss_qti)
+
+r_dir_file(vendor_hal_gnss_qti, firmware_file)
+
+unix_socket_connect(vendor_hal_gnss_qti, vendor_rild, rild)
+unix_socket_connect(vendor_hal_gnss_qti, vendor_ssgtzd, rild)
+unix_socket_connect(vendor_hal_gnss_qti, vendor_ssgtzd, vendor_location)
+unix_socket_connect(vendor_hal_gnss_qti, vendor_ssgtzd, vendor_ssgtzd)
+
+unix_socket_send(vendor_hal_gnss_qti, vendor_ssgtzd, vendor_location)
+unix_socket_send(vendor_hal_gnss_qti, vendor_ssgtzd, vendor_location_edgnss_daemon)
+unix_socket_send(vendor_hal_gnss_qti, vendor_ssgtzd, vendor_location_engine_service)
+unix_socket_send(vendor_hal_gnss_qti, vendor_ssgtzd, vendor_location_lowi_server)
+unix_socket_send(vendor_hal_gnss_qti, vendor_ssgtzd, vendor_location_slim_daemon)
+unix_socket_send(vendor_hal_gnss_qti, vendor_ssgtzd, vendor_location_xtra_daemon)
+unix_socket_send(vendor_hal_gnss_qti, vendor_ssgtzd, vendor_location_xtwifi_client)
+unix_socket_send(vendor_hal_gnss_qti, vendor_ssgtzd, vendor_qsap_location)
+
+vndbinder_use(vendor_hal_gnss_qti)
+
+allow hal_gnss self:qipcrtr_socket create_socket_perms_no_ioctl;
+allow hal_gnss_default gnss_device:chr_file rw_file_perms;
+allow vendor_hal_gnss_qti vendor_location_data_file:dir create_dir_perms;
+allow vendor_hal_gnss_qti vendor_location_data_file:fifo_file { open read setattr write };
+allow vendor_hal_gnss_qti vendor_location_data_file:file create_file_perms;
+allow vendor_hal_gnss_qti vendor_location_socket:dir rw_dir_perms;
+allow vendor_hal_gnss_qti vendor_location_socket:{ lnk_file sock_file } create_file_perms;
+allow vendor_hal_gnss_qti vendor_per_mgr_service:service_manager find;
+allow vendor_hal_gnss_qti vendor_qsap_location_socket:dir rw_dir_perms;
+allow vendor_hal_gnss_qti vendor_qsap_location_socket:sock_file create_file_perms;
+allow vendor_hal_gnss_qti vendor_rild_socket:dir search;
+allow vendor_hal_gnss_qti vendor_sysfs_mhi:file r_file_perms;
+
+dontaudit vendor_hal_gnss_qti self:udp_socket create;

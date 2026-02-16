@@ -1,0 +1,30 @@
+type mi_thermald, domain, mlstrustedsubject;
+type mi_thermald_exec, exec_type, file_type, vendor_file_type;
+
+init_daemon_domain(mi_thermald)
+
+r_dir_file(mi_thermald, sysfs)
+r_dir_file(mi_thermald, sysfs_leds)
+r_dir_file(mi_thermald, sysfs_thermal)
+
+unix_socket_connect(mi_thermald, property, init)
+
+allow mi_thermald mi_thermald:capability { chown fowner sys_admin };
+allow mi_thermald mi_thermald:capability2 { block_suspend wake_alarm };
+allow mi_thermald self:capability { fsetid sys_boot };
+allow mi_thermald sysfs:file w_file_perms;
+allow mi_thermald sysfs_devices_system_cpu:file rw_file_perms;
+allow mi_thermald sysfs_graphics:dir r_dir_perms;
+allow mi_thermald sysfs_graphics:file rw_file_perms;
+allow mi_thermald sysfs_graphics:lnk_file r_file_perms;
+allow mi_thermald sysfs_thermal:file w_file_perms;
+allow mi_thermald thermal_data_file:dir { add_name read remove_name search watch write };
+allow mi_thermald thermal_data_file:file { create getattr open read rename setattr unlink write };
+allow mi_thermald vendor_sysfs_battery_supply:dir { open read search };
+allow mi_thermald vendor_sysfs_battery_supply:dir r_dir_perms;
+allow mi_thermald vendor_sysfs_battery_supply:file { getattr open read write };
+allow mi_thermald vendor_sysfs_battery_supply:file rw_file_perms;
+allow mi_thermald vendor_sysfs_battery_supply:lnk_file r_file_perms;
+allow mi_thermald vendor_sysfs_graphics:dir { open read search };
+allow mi_thermald vendor_sysfs_graphics:file { getattr open read write };
+allow mi_thermald vendor_thermal_normal_prop:property_service set;

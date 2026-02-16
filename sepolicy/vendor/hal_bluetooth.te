@@ -1,0 +1,35 @@
+type hal_bluetooth_default, domain;
+type hal_bluetooth_default_exec, exec_type, file_type, vendor_file_type;
+
+hal_server_domain(hal_bluetooth_default, hal_bluetooth)
+hal_server_domain(hal_bluetooth_default, vendor_hal_btconfigstore)
+hal_server_domain(hal_bluetooth_default, vendor_hal_fm)
+
+binder_call(hal_bluetooth, servicemanager)
+
+get_prop(hal_bluetooth_default, vendor_soc_id_prop)
+get_prop(hal_bluetooth_default, vendor_wlanchip_prop)
+
+hal_attribute_service(hal_bluetooth, vendor_hal_bttpi_service)
+hal_attribute_service(hal_bluetooth, vendor_hal_xpanprovider_service)
+
+init_daemon_domain(hal_bluetooth_default)
+
+r_dir_file(hal_bluetooth_default, bt_firmware_file)
+r_dir_file(hal_bluetooth_default, mnt_vendor_file)
+
+set_prop(hal_bluetooth, vendor_bluetooth_prop)
+
+unix_socket_connect(hal_bluetooth_default, vendor_ssgtzd, vendor_ssgtzd)
+
+allow hal_bluetooth fwk_scheduler_hwservice:hwservice_manager find;
+allow hal_bluetooth system_server:binder call;
+allow hal_bluetooth_default bt_device:chr_file { open read write };
+allow hal_bluetooth_default self:bluetooth_socket { bind create read write };
+allow hal_bluetooth_default self:qipcrtr_socket create_socket_perms_no_ioctl;
+allow hal_bluetooth_default vendor_bt_device:chr_file rw_file_perms;
+allow hal_bluetooth_default vendor_fm_radio_device:chr_file r_file_perms;
+allow hal_bluetooth_default vendor_persist_bluetooth_file:dir rw_dir_perms;
+allow hal_bluetooth_default vendor_persist_bluetooth_file:file create_file_perms;
+allow hal_bluetooth_default vendor_sysfs_bt_uart:file w_file_perms;
+allow hal_bluetooth_default wdsdaemon:binder call;

@@ -1,0 +1,51 @@
+# Audio
+/dev/socket/audio_hw_socket u:object_r:audio_socket:s0
+
+# Diag
+/data/vendor/modem(/.*)? u:object_r:vendor_modem_data_file:s0
+
+# Display
+/sys/devices/virtual/mi_display/disp_feature/disp-DSI-+[0-1](/.*)? u:object_r:vendor_sysfs_displayfeature:s0
+
+# Displayfeature
+/(vendor|system/vendor)/bin/displayfeature u:object_r:vendor_displayfeature_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.xiaomi\.hardware\.displayfeature_aidl-service u:object_r:vendor_hal_displayfeature_xiaomi_default_exec:s0
+/dev/disp_feature u:object_r:vendor_displayfeature_device:s0
+
+# Fingerprint
+/dev/goodix_fp u:object_r:fingerprintd_device:s0
+/dev/silead_fp u:object_r:fingerprintd_device:s0
+
+/(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint-service\.xiaomi u:object_r:hal_fingerprint_default_exec:s0
+
+/dev/silead_s.* u:object_r:silead_fpd_device:s0
+/data/(vendor|system)/silead(/.*)? u:object_r:silead_fpd_data_file:s0
+/dev/spidev.* u:object_r:silead_fpd_device:s0
+/persist/silead(/.*)? u:object_r:silead_fpd_data_file:s0
+
+# Mac Address
+/data/vendor/mac_addr(/.*)? u:object_r:vendor_mac_addr_file:s0
+
+# MiThermal
+/(vendor|system/vendor)/bin/hw/android\.hardware\.thermal-service\.example u:object_r:hal_thermal_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.thermal@1\.[01]-service u:object_r:hal_thermal_default_exec:s0
+/(vendor|system/vendor)/bin/mi_thermald u:object_r:mi_thermald_exec:s0
+/(vendor|system/vendor)/bin/mi_thermald_ruan u:object_r:mi_thermald_exec:s0
+/data/vendor/thermal(/.*)? u:object_r:thermal_data_file:s0
+/dev/socket/thermal-recv-client u:object_r:vendor_thermal_socket:s0
+/dev/socket/thermal-recv-passive-client u:object_r:vendor_thermal_socket:s0
+/dev/socket/thermal-send-client u:object_r:vendor_thermal_socket:s0
+/dev/socket/thermal-send-rule u:object_r:vendor_thermal_socket:s0
+/sys/class/thermal(/.*)? u:object_r:sysfs_thermal:s0
+/vendor/bin/hw/android.hardware.thermal-service.qti u:object_r:hal_thermal_default_exec:s0
+/vendor/bin/hw/android.hardware.thermal@2.0-service.qti u:object_r:hal_thermal_default_exec:s0
+/vendor/bin/hw/android.hardware.thermal@2.0-service.qti-v2 u:object_r:hal_thermal_default_exec:s0
+
+# Mlipay
+/(odm|vendor/odm|system/vendor)/bin/mlipayd u:object_r:hal_mlipay_default_exec:s0
+
+# Modem
+/dev/smd8 u:object_r:vendor_radio_smd_device:s0
+
+# Touch
+/sys/devices/virtual/touch/touch_dev/palm_sensor u:object_r:sysfs_tp_virtual_prox:s0
