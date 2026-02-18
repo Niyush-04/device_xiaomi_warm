@@ -1,4 +1,0 @@
-# Fingerprint
-on post-fs-data
-    mkdir /data/vendor/goodix 0777 system system
-    chmod 0666 /sys/bus/platform/devices/soc:xiaomi_fingerprint/fingerdown

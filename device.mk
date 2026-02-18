@@ -204,7 +204,6 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.recovery.qcom.rc \
     init.target.rc \
-    init.warm.rc \
     ueventd.qcom.rc
 
 # Input

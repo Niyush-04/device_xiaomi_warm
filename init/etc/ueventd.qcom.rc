@@ -610,5 +610,5 @@ subsystem mem_buf_vm
 /dev/q2spiuwb    0660    uwb    uwb
 
 # Goodix Fingerprint
-/dev/goodix_fp  0660  system  system
+/dev/goodix_fp  0666  system  system
 

@@ -122,6 +122,10 @@ on post-fs-data
     #Enable SSR
     setprop persist.vendor.ssr.restart_level ALL_ENABLE
 
+    # Fingerprint
+    mkdir /data/vendor/goodix 0777 system system
+    chmod 0666 /sys/bus/platform/devices/soc:xiaomi_fingerprint/fingerdown
+
 service init_cplicense /vendor/bin/sh /vendor/bin/init.qti.cplicense.sh
     class late_start
     user system
