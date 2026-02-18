@@ -5,12 +5,6 @@ ro.vendor.audio.notification.single=true
 tunnel.audio.encode=true
 use.voice.path.for.pcm.voip=true
 
-# Bluetooth
-persist.vendor.btstack.aac_frm_ctl.enabled=true
-ro.bluetooth.emb_wp_mode=false
-ro.bluetooth.library_name=libbluetooth.so
-ro.bluetooth.wipower=false
-
 # Camera
 persist.vendor.camera.privapp.list=org.codeaurora.snapcam
 vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.xiaomi.runin,com.xiaomi.cameratest,com.xiaomi.factory.mmi
