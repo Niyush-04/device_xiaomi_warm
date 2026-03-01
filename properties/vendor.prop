@@ -201,6 +201,7 @@ persist.vendor.radio.rat_on=combine
 persist.vendor.radio.sib16_support=1
 
 # Sensors
+persist.vendor.sensor.mischeck=true
 persist.vendor.sensors.enable.mag_filter=true
 persist.vendor.sensors.support_direct_channel=false
 

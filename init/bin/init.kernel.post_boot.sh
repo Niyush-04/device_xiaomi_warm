@@ -105,5 +105,5 @@ done
 
 sleep 600
 echo 6144 > /proc/sys/vm/min_free_kbytes
-echo 20 > /proc/sys/vm/watermark_scale_factor
+echo 10 > /proc/sys/vm/watermark_scale_factor
 
